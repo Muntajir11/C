@@ -67,7 +67,40 @@ void printNodes(struct node *ptr)
   	 previous->next=ptr;	  
   }
   
+  deleteNode(struct node *head,int pos)
+  {
+  	struct node *ptr=head;
+  	int i=1;
+  	while(i!=pos-1)
+  	{
+  		ptr=ptr->next;
+  		i++;
+	  }
+	  
+  	struct node *q=ptr->next;
+  	ptr->next=q->next;
+  	free(q);
+  	
+  }
   
+  
+ struct node * reverseNodes(struct node *head)
+  {
+  	struct node *current,*previous,*temp;
+  	current=head;
+  	previous=NULL;
+  	
+  	while(current!=NULL)
+  	{
+  		temp=current->next;
+  		current->next=previous;
+  		previous=current;
+  		current=temp;
+  		
+	  }
+  	return previous;
+  	
+  }
 int main()
 {
 
@@ -98,16 +131,21 @@ int main()
      node5->data=5;
     node5->next=NULL;
     
-    printf("Before Inserting\n");
-	printNodes(node1);
-	printf("\n");
-		
-	printf("Inserting at first\n");
-	node1=insertatFirst(node1,99);
+    printf("Before \n");
 	printNodes(node1);
 	printf("\n");
 	
-	//Uncomment the function you want to call
+	node1= reverseNodes(node1);
+	printf("After \n");
+    printNodes(node1);
+    printf("\n");
+    
+//	deleteNode(node1,3);
+//	printNodes(node1);	
+//	printf("Inserting at first\n");
+//	node1=insertatFirst(node1,99);
+//	printNodes(node1);
+//	printf("\n");
 	
 //	printf("Inserting at index 2\n");
 //   insertatIndex(node1,20,2);
